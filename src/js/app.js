@@ -1,6 +1,43 @@
+// --------------------------- STOPWATCH --------------------------
+const HTML_SECONDS = document.querySelector(".seconds");
+const HTML_MILLISECONDS = document.querySelector(".milliseconds");
+let seconds = 0;
+let milliseconds = 0;
+let interval;
+
+function stopTimer() {
+  clearInterval(interval);
+}
+
+function startTimer() {
+  stopTimer();
+  interval = setInterval(() => {
+    milliseconds++;
+
+    if (milliseconds > 99) {
+      milliseconds = 0;
+      seconds++;
+    }
+
+    HTML_SECONDS.innerHTML = `${seconds}`.padStart(2, "0");
+    HTML_MILLISECONDS.innerHTML = `${milliseconds}`.padStart(2, "0");
+  }, 10);
+}
+
+function resetTimer() {
+  stopTimer();
+  seconds = 0;
+  milliseconds = 0;
+  HTML_SECONDS.innerHTML = `${seconds}`.padStart(2, "0");
+  HTML_MILLISECONDS.innerHTML = `${milliseconds}`.padStart(2, "0");
+}
+// ----------------------------------------------------------------
+
+// ---------------------- VARIÁVEIS GLOBAIS -----------------------
 let clickCount = 0;
 let cardQuantity = 14;
 let won = false;
+// ----------------------------------------------------------------
 
 function restartGame() {
   if (prompt("Deseja reiniciar o jogo?") === "sim") {
@@ -9,6 +46,9 @@ function restartGame() {
       clickCount = 0;
       won = false;
     });
+
+    resetTimer();
+    startTimer();
   }
 }
 
@@ -64,8 +104,13 @@ function selectCard(element) {
       if (!won) {
         clickCount++;
         if (getFoundCount() === cardQuantity) {
+          stopTimer();
           won = true;
-          window.setTimeout(alert, 500, `Você ganhou em ${clickCount} rodadas`);
+          window.setTimeout(
+            alert,
+            500,
+            `Você ganhou em ***${clickCount}*** rodadas!\nTempo gasto: ***${seconds}s e ${milliseconds}ms***`
+          );
           window.setTimeout(restartGame, 500);
         }
       }
@@ -73,20 +118,22 @@ function selectCard(element) {
   }
 }
 
-function validateQuantity(quantity) {
-  if (!quantity) {
-    return false;
-  }
-  if (quantity % 2 === 1) {
-    return false;
-  }
-  if (quantity < 4 || quantity > 14) {
-    return false;
-  }
-  return true;
-}
+// function validateQuantity(quantity) {
+//   if (!quantity) {
+//     return false;
+//   }
+//   if (quantity % 2 === 1) {
+//     return false;
+//   }
+//   if (quantity < 4 || quantity > 14) {
+//     return false;
+//   }
+//   return true;
+// }
 
 // let cardQuantity;
 // do {
 //   cardQuantity = parseInt(prompt("Digite a quantidade de cartas (4 à 14):"));
 // } while (!validadeQuantity(cardQuantity));
+
+startTimer();

@@ -16,6 +16,7 @@ h1 {
   font-size: 56px;
   line-height: 66px;
   letter-spacing: -0.004em;
+  text-align: center;
   color: #75b79e;
 
   margin: 40px 0px;
@@ -52,7 +53,7 @@ ul {
   align-items: center;
   justify-content: center;
   position: absolute;
-  
+
   backface-visibility: hidden;
   transition: transform 500ms;
   transform-style: preserve-3d;
@@ -77,4 +78,28 @@ ul {
 .card img {
   width: 100px;
   height: 100px;
+}
+
+.stopwatch {
+  padding: 5px 5px 0 0;
+
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: -0.004em;
+
+  color: #75b79e;
+  background-color: #eef9bf;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: -0.004em;
+  }
 }
