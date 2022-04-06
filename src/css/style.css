@@ -34,6 +34,7 @@ ul {
   height: 146px;
   position: relative;
 
+  cursor: pointer;
   margin: 17px;
 }
 
@@ -61,11 +62,11 @@ ul {
   transform: rotateY(180deg);
 }
 
-.card:hover .back-face {
+.card.rotate .back-face {
   transform: rotateY(0deg);
 }
 
-.card:hover .front-face {
+.card.rotate .front-face {
   transform: rotateY(-180deg);
 }
 
