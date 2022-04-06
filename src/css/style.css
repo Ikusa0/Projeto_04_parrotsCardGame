@@ -54,7 +54,7 @@ ul {
   position: absolute;
   
   backface-visibility: hidden;
-  transition: all 0.5s;
+  transition: transform 500ms;
   transform-style: preserve-3d;
 }
 
@@ -62,11 +62,15 @@ ul {
   transform: rotateY(180deg);
 }
 
-.card.rotate .back-face {
+.card.flip .back-face,
+.card.found .back-face,
+.card.temp .back-face {
   transform: rotateY(0deg);
 }
 
-.card.rotate .front-face {
+.card.flip .front-face,
+.card.found .front-face,
+.card.temp .front-face {
   transform: rotateY(-180deg);
 }
 
