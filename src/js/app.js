@@ -183,4 +183,4 @@ function startGame() {
 }
 // ================================================================
 
-startGame();
+window.onload = startGame;
