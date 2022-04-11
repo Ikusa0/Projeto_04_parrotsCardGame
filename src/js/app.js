@@ -108,33 +108,33 @@ function validateQuantity(quantity) {
 function selectCard(element) {
   // Evita bug no clickCount caso clique muito rápido, também evita de selecionar uma carta que está virando
   if (element.classList.contains("found") || element.classList.contains("temp")) return;
-  
+
   const flipped = getFlipped();
   element.classList.add("flip");
 
-  if (flipped !== element) {
-    if (flipped) {
-      const elementImage = getBackImage(element);
-      const flippedImage = getBackImage(flipped);
-      if (elementImage === flippedImage) {
-        pairFound(element, flipped);
-      } else {
-        pairNotFound(element, flipped);
-        window.setTimeout(flipBack, 1000, element, flipped);
-      }
-    }
+  if (flipped === element) return;
 
-    clickCount++;
-
-    if (winner()) {
-      stopTimer();
-      window.setTimeout(
-        alert,
-        500,
-        `Você ganhou em ***${clickCount}*** rodadas!\nTempo gasto: ***${seconds}s e ${milliseconds}ms***`
-      );
-      window.setTimeout(restartGame, 500);
+  if (flipped) {
+    const elementImage = getBackImage(element);
+    const flippedImage = getBackImage(flipped);
+    if (elementImage === flippedImage) {
+      pairFound(element, flipped);
+    } else {
+      pairNotFound(element, flipped);
+      window.setTimeout(flipBack, 1000, element, flipped);
     }
+  }
+
+  clickCount++;
+
+  if (winner()) {
+    stopTimer();
+    window.setTimeout(
+      alert,
+      500,
+      `Você ganhou em ***${clickCount}*** rodadas!\nTempo gasto: ***${seconds}s e ${milliseconds}ms***`
+    );
+    window.setTimeout(restartGame, 500);
   }
 }
 // ================================================================
